@@ -12,7 +12,7 @@ plugins {
     id("com.github.spotbugs") version "6.0.18"
     id("com.github.jk1.dependency-license-report") version "2.8"
     id("com.diffplug.spotless") version "7.0.3"
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
+    id("org.jlleitschuh.gradle.ktlint") version "12.3.0"
     jacoco
     `maven-publish`
     signing
