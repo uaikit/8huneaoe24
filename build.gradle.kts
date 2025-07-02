@@ -106,27 +106,27 @@ tasks {
     }
 
     compileKotlin {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
         doLast { println("Finished compiling Kotlin source code") }
     }
 
     compileTestKotlin {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
         doLast { println("Finished compiling Kotlin Test source code") }
     }
 
     compileJava {
         options.encoding = "UTF-8"
         options.compilerArgs.addAll(listOf("-Xlint:deprecation"))
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
     }
 
     compileTestJava {
         options.encoding = "UTF-8"
         options.compilerArgs.addAll(listOf("-Xlint:deprecation"))
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
     }
 
     jacocoTestReport {
@@ -145,24 +145,6 @@ tasks {
         sourceDirectories.setFrom(files(listOf("src/main/java", "src/main/kotlin")))
     }
 
-    dokkaHtml.configure {
-        dokkaSourceSets {
-            configureEach {
-                jdkVersion.set(11)
-                noStdlibLink.set(true)
-            }
-        }
-    }
-
-    dokkaJavadoc.configure {
-        dokkaSourceSets {
-            configureEach {
-                jdkVersion.set(11)
-                noStdlibLink.set(true)
-            }
-        }
-    }
-
     test {
         testLogging {
 //            exceptionFormat = TestExceptionFormat.FULL
@@ -173,7 +155,7 @@ tasks {
 
     withType<Detekt>().configureEach {
         // Target version of the generated JVM bytecode. It is used for type resolution.
-        jvmTarget = "11"
+        jvmTarget = "17"
         reports {
             // observe findings in your browser with structure and code snippets
             html.required.set(true)
@@ -191,6 +173,14 @@ tasks {
         manifest {
             attributes["Main-Class"] = application.mainClass
         }
+    }
+}
+
+dokka.dokkaSourceSets {
+    configureEach {
+        jdkVersion.set(17)
+        enableJdkDocumentationLink.set(false)
+        enableKotlinStdLibDocumentationLink.set(false)
     }
 }
 
